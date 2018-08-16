@@ -16,6 +16,8 @@ zip_ref.close()
 
 with open('unzipped/word/document.xml') as f:
     text = f.read()
+print(text)
+
 #  Pulldown
 
 shutil.rmtree('unzipped')  # Removes full folder.
