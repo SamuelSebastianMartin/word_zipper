@@ -24,19 +24,32 @@ def doc_unzip():
 
 def parse():
     tree = ET.parse('unzipped/word/document.xml')
-    root = tree.getroot()
-    print('root.tag = ', root.tag)
-    print('root.attrib = ', root.attrib)
     return tree
 
 
 def experiment_zone(tree):
     '''This function is for playing with to see what is possible.'''
-    os.system('echo " " >> unzipped/word/document.xml')
-    #with open('unzipped/word/document.xml') as f:
-    #    text = f.read()
-    #    text.remove(' xml:space="preserve"')
 
+
+    def minimal_change():
+        '''Check that an altered and rezipped .docx file will open in MS Word
+        without being marked as "corupted"'''
+        os.system('echo " " >> unzipped/word/document.xml')
+
+
+    def explore_tree(tree):
+        root = tree.getroot()
+        if len(root) > 0:
+            node0 = [node for node in root]
+            print('ROOT NODES {} >>>>> {}'.format(len(root), node0))
+
+            children = [node for node in root[0]]
+            for child in children:
+                print('  CHILD {} LENGTH {} >>>> {}'.format(
+                    children.index(child), len(child), child))
+
+
+    explore_tree(tree)
 
 def rezip():
     '''Takes any changes, and creates a new .docx file.'''
